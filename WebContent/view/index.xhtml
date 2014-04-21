@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+	<title>JSF Simple Notes</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<h1>JSF Simple Notes!</h1>
+	
+	Nome: <h:inputText value="#{notesController.newNote.name}" />
+	Texto: <h:inputText value="#{notesController.newNote.text}" />
+		<h:commandButton value="Inserir!">
+			<f:ajax listener="#{notesController.insereNota}" render="table:dados" execute="@form"/>
+		</h:commandButton>
+
+		<h:form id="table">
+			<p:dataTable id="dados" var="nota" value="#{notesController.allNotes}">
+
+				<p:column headerText="ID" sortBy="#{nota.id}">
+					<h:outputText value="#{nota.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{nota.name}">
+					<h:outputText value="#{nota.name}" />
+				</p:column>
+
+				<p:column headerText="Texto da Nota">
+					<h:outputText value="#{nota.text}" />
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+	</h:form>
+</h:body>
+
+</html>
